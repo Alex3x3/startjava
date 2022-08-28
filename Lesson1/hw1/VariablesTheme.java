@@ -16,15 +16,15 @@ public class VariablesTheme {
         System.out.println("Длина CPU " + cpuCaseLength + " мм");
         double cpuCaseWidth = 40.15;
         System.out.println("Ширина CPU " + cpuCaseWidth + " мм");
-        boolean manufacturedByIntel = true;
-        System.out.println("Произведено в Intel: " + manufacturedByIntel);
+        boolean isManufacturedByIntel = true;
+        System.out.println("Произведено в Intel: " + isManufacturedByIntel);
 
         System.out.println("\nЗадание 2: Расчет стоимости товара со скидкой\n");
         int penPrice = 100;
         int bookPrice = 200;
-        int discount = 11;
+        int discountPercentage = 11;
         int fullPrice = penPrice + bookPrice;
-        int discountSum = fullPrice*discount/100;
+        int discountSum = fullPrice*discountPercentage/100;
         int priceWithDiscount = fullPrice - discountSum;
         System.out.println("Сумма скидки: " + discountSum);
         System.out.println("Общая стоимость товаров со скидкой: " + priceWithDiscount);
@@ -66,12 +66,14 @@ public class VariablesTheme {
         int intTempNum = intNum1;
         intNum1 = intNum2;
         intNum2 = intTempNum;
-        System.out.println("После перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2);
+        System.out.println("После перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2
+                + "\n");
         System.out.println("Перестановка с помощью арифметических операций");
         System.out.println("До перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2);
         intNum1 -= 3;
         intNum2 += 3;
-        System.out.println("После перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2);
+        System.out.println("После перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2
+                + "\n");
         System.out.println("Перестановка с помощью побитовой операции ^");
         System.out.println("До перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2);
         intNum1 = intNum1 ^ 7;
