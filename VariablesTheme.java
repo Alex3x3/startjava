@@ -4,7 +4,7 @@ public class VariablesTheme {
         System.out.println("Задание 1: Создание переменных и вывод их значений на консоль\n");
         byte coresNum = 4;
         System.out.println("Количество ядер: " + coresNum);
-        short cpuFrequency = 3800 ;
+        short cpuFrequency = 3800;
         System.out.println("Частота ядра: " + cpuFrequency + " MHz");
         char cpuStepping = 'D';
         System.out.println("Степпинг ЦП: " + cpuStepping);
@@ -132,7 +132,7 @@ public class VariablesTheme {
 
         System.out.println("\nЗадание 10: Преобразование секунд\n");
         int sec = 86399;
-        int hours = sec / 3600 ;
+        int hours = sec / 3600;
         int minutes = (86399 - hours * 3600) / 60;
         sec %= 60;
         System.out.println(hours + ":" + minutes + ":" + sec);
