@@ -11,3 +11,6 @@
 1. SQL
 1. PostgreSQL
 1. psql
+
+This is unnecessory comment for showing an ability of changing
+a file inside github and pulling it back to the local repository 
