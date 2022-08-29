@@ -24,10 +24,10 @@ public class VariablesTheme {
         int bookPrice = 200;
         int discountPercentage = 11;
         int fullPrice = penPrice + bookPrice;
-        int discountSum = fullPrice*discountPercentage/100;
-        int priceWithDiscount = fullPrice - discountSum;
+        int discountSum = fullPrice * discountPercentage/100;
+        int discountPrice = fullPrice - discountSum;
         System.out.println("Сумма скидки: " + discountSum);
-        System.out.println("Общая стоимость товаров со скидкой: " + priceWithDiscount);
+        System.out.println("Общая стоимость товаров со скидкой: " + discountPrice);
 
         System.out.println("\nЗадание 3: Вывод на консоль слова JAVA\n");
         System.out.println("   J    a  v     v  a");
@@ -51,92 +51,89 @@ public class VariablesTheme {
         long longNum = 9_223_372_036_854_775_807L;
         System.out.println("Long type number: " + (longNum) + ", " + (++longNum) + ", " +
                 (--longNum));
-        float floatNum = 3.4028235E38F;
-        System.out.println("Float type number: " + (floatNum) + ", " + (++floatNum+1) + ", " +
-                (--floatNum));
-        double doubleNum = 1.7976931348623157E308;
-        System.out.println("Double type number: " + (doubleNum) + ", " + (++doubleNum) + ", " +
-                (--doubleNum));
 
         System.out.println("\nЗадание 5: Перестановка значений переменных\n");
         System.out.println("Перестановка с помощью третьей переменной");
-        int intNum1 = 2;
-        int intNum2 = 5;
-        System.out.println("До перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2);
-        int intTempNum = intNum1;
-        intNum1 = intNum2;
-        intNum2 = intTempNum;
-        System.out.println("После перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2
+        int num1 = 2;
+        int num2 = 5;
+        System.out.println("До перестановки: Число1 = " + num1 + ", Число2 = " + num2);
+        int temp = num1;
+        num1 = num2;
+        num2 = temp;
+        System.out.println("После перестановки: Число1 = " + num1 + ", Число2 = " + num2
                 + "\n");
+
         System.out.println("Перестановка с помощью арифметических операций");
-        System.out.println("До перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2);
-        intNum1 -= 3;
-        intNum2 += 3;
-        System.out.println("После перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2
+        System.out.println("До перестановки: Число1 = " + num1 + ", Число2 = " + num2);
+        int diff = num1 - num2;
+        num1 -= diff;
+        num2 += diff;
+        System.out.println("После перестановки: Число1 = " + num1 + ", Число2 = " + num2
                 + "\n");
+
         System.out.println("Перестановка с помощью побитовой операции ^");
-        System.out.println("До перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2);
-        intNum1 = intNum1 ^ 7;
-        intNum2 = intNum2 ^ 7;
-        System.out.println("После перестановки: Число1 = " + intNum1 + ", Число2 = " + intNum2);
+        System.out.println("До перестановки: Число1 = " + num1 + ", Число2 = " + num2);
+        diff = num1 ^ num2;
+        num1 = num1 ^ diff;
+        num2 = num2 ^ diff;
+        System.out.println("После перестановки: Число1 = " + num1 + ", Число2 = " + num2);
 
         System.out.println("\nЗадание 6: Вывод символов и их кодов\n");
-        char charValue1 = 35;
-        System.out.println((int) charValue1 + " " + charValue1);
-        char charValue2 = 38;
-        System.out.println((int) charValue2 + " " + charValue2);
-        char charValue3 = 64;
-        System.out.println((int) charValue3 + " " + charValue3);
-        char charValue4 = 94;
-        System.out.println((int) charValue4 + " " + charValue4);
-        char charValue5 = 95;
-        System.out.println((int) charValue5 + " " + charValue5);
-
+        char code1 = 35;
+        System.out.println((int) code1 + " " + code1);
+        char code2 = 38;
+        System.out.println((int) code2 + " " + code2);
+        char code3 = 64;
+        System.out.println((int) code3 + " " + code3);
+        char code4 = 94;
+        System.out.println((int) code4 + " " + code4);
+        char code5 = 95;
+        System.out.println((int) code5 + " " + code5);
 
         System.out.println("\nЗадание 7: Отображение количества сотен, десятков и единиц числа\n");
         int srcNum = 123;
         System.out.println("Число " + srcNum + " содержит:");
-        int hundreds = srcNum/100;
+        int hundreds = srcNum / 100;
         System.out.println(hundreds + " сотен");
-        int dozens = (srcNum - hundreds*100)/10;
+        int dozens = srcNum % 100 / 10;
         System.out.println(dozens + " десятков");
-        int units = srcNum % 10;
-        System.out.println(units + " единиц");
+        int ones = srcNum % 100 % 10;
+        System.out.println(ones + " единиц");
 
         System.out.println("\nЗадание 8: Вывод на консоль ASCII-арт Дюка\n");
-        charValue1 = '/';
-        charValue2 = '\\';
-        charValue3 = ' ';
-        charValue4 = '_';
-        charValue5 = '(';
-        char charValue6 = ')';
-        System.out.println("" + charValue3 + charValue3 + charValue3 + charValue3 + charValue1 +
-                charValue2);
-        System.out.println("" + charValue3 + charValue3 + charValue3 + charValue1 + charValue3 +
-                charValue3 + charValue2);
-        System.out.println("" + charValue3 + charValue3 + charValue1 + charValue4 + charValue5 +
-                charValue3 + charValue6 + charValue2);
-        System.out.println("" + charValue3 + charValue1 + charValue3 + charValue3 + charValue3 +
-                charValue3 + charValue3 + charValue3 + charValue2);
-        System.out.println("" + charValue1 + charValue4 + charValue4 + charValue4 + charValue4 +
-                charValue1 + charValue2 + charValue4 + charValue4 + charValue2);
+        char slash = '/';
+        char backslash = '\\';
+        char point = ' ';
+        char underline = '_';
+        char leftBracket = '(';
+        char rightBracket = ')';
+        System.out.println("" + point + point + point + point + slash +
+                backslash);
+        System.out.println("" + point + point + point + slash + point +
+                point + backslash);
+        System.out.println("" + point + point + slash + underline + leftBracket +
+                point + rightBracket + backslash);
+        System.out.println("" + point + slash + point + point + point +
+                point + point + point + backslash);
+        System.out.println("" + slash + underline + underline + underline + underline +
+                slash + backslash + underline + underline + backslash);
 
         System.out.println("\nЗадание 9: Произведение и сумма цифр числа\n");
         srcNum = 345;
-        hundreds = srcNum/100;
-        dozens = (srcNum - hundreds*100)/10;
-        units = srcNum % 10;
-        int productOfNums = hundreds * dozens * units;
-        int sumOfNums = hundreds + dozens + units;
-        System.out.println("Сумма цифр числа "  + srcNum + " равна: " + sumOfNums);
-        System.out.println("Произведение цифр числа "  + srcNum + " равна: " + productOfNums);
-
+        hundreds = srcNum / 100;
+        dozens = srcNum % 100 / 10;
+        ones = srcNum % 100 % 10;
+        int prodDigits = hundreds * dozens * ones;
+        int sumDigits = hundreds + dozens + ones;
+        System.out.println("Сумма цифр числа "  + srcNum + " равна: " + sumDigits
+);
+        System.out.println("Произведение цифр числа "  + srcNum + " равна: " + prodDigits);
 
         System.out.println("\nЗадание 10: Преобразование секунд\n");
-        int sec = 86399;
-        int hours = sec / 3600;
-        int minutes = (86399 - hours * 3600) / 60;
-        sec %= 60;
-        System.out.println(hours + ":" + minutes + ":" + sec);
+        int totalSec = 86399;
+        int hours = totalSec / 3600;
+        int minutes = totalSec % 3600 / 60;
+        totalSec = totalSec % 3600 % 60;
+        System.out.println(hours + ":" + minutes + ":" + totalSec);
     }
 }
