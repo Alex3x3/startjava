@@ -24,7 +24,7 @@ public class VariablesTheme {
         int bookPrice = 200;
         int discountPercentage = 11;
         int fullPrice = penPrice + bookPrice;
-        int discountSum = fullPrice * discountPercentage/100;
+        int discountSum = fullPrice * discountPercentage / 100;
         int discountPrice = fullPrice - discountSum;
         System.out.println("Сумма скидки: " + discountSum);
         System.out.println("Общая стоимость товаров со скидкой: " + discountPrice);
@@ -65,17 +65,17 @@ public class VariablesTheme {
 
         System.out.println("Перестановка с помощью арифметических операций");
         System.out.println("До перестановки: Число1 = " + num1 + ", Число2 = " + num2);
-        int diff = num1 - num2;
-        num1 -= diff;
-        num2 += diff;
+        temp = num1 - num2;
+        num1 -= temp;
+        num2 += temp;
         System.out.println("После перестановки: Число1 = " + num1 + ", Число2 = " + num2
                 + "\n");
 
         System.out.println("Перестановка с помощью побитовой операции ^");
         System.out.println("До перестановки: Число1 = " + num1 + ", Число2 = " + num2);
-        diff = num1 ^ num2;
-        num1 = num1 ^ diff;
-        num2 = num2 ^ diff;
+        temp = num1 ^ num2;
+        num1 = num1 ^ temp;
+        num2 = num2 ^ temp;
         System.out.println("После перестановки: Число1 = " + num1 + ", Число2 = " + num2);
 
         System.out.println("\nЗадание 6: Вывод символов и их кодов\n");
@@ -97,24 +97,24 @@ public class VariablesTheme {
         System.out.println(hundreds + " сотен");
         int dozens = srcNum % 100 / 10;
         System.out.println(dozens + " десятков");
-        int ones = srcNum % 100 % 10;
+        int ones = srcNum % 10;
         System.out.println(ones + " единиц");
 
         System.out.println("\nЗадание 8: Вывод на консоль ASCII-арт Дюка\n");
         char slash = '/';
         char backslash = '\\';
-        char point = ' ';
+        char space = ' ';
         char underline = '_';
         char leftBracket = '(';
         char rightBracket = ')';
-        System.out.println("" + point + point + point + point + slash +
+        System.out.println("" + space + space + space + space + slash +
                 backslash);
-        System.out.println("" + point + point + point + slash + point +
-                point + backslash);
-        System.out.println("" + point + point + slash + underline + leftBracket +
-                point + rightBracket + backslash);
-        System.out.println("" + point + slash + point + point + point +
-                point + point + point + backslash);
+        System.out.println("" + space + space + space + slash + space +
+                space + backslash);
+        System.out.println("" + space + space + slash + underline + leftBracket +
+                space + rightBracket + backslash);
+        System.out.println("" + space + slash + space + space + space +
+                space + space + space + backslash);
         System.out.println("" + slash + underline + underline + underline + underline +
                 slash + backslash + underline + underline + backslash);
 
@@ -122,7 +122,7 @@ public class VariablesTheme {
         srcNum = 345;
         hundreds = srcNum / 100;
         dozens = srcNum % 100 / 10;
-        ones = srcNum % 100 % 10;
+        ones = srcNum % 10;
         int prodDigits = hundreds * dozens * ones;
         int sumDigits = hundreds + dozens + ones;
         System.out.println("Сумма цифр числа "  + srcNum + " равна: " + sumDigits
@@ -133,7 +133,7 @@ public class VariablesTheme {
         int totalSec = 86399;
         int hours = totalSec / 3600;
         int minutes = totalSec % 3600 / 60;
-        totalSec = totalSec % 3600 % 60;
+        totalSec = totalSec % 60;
         System.out.println(hours + ":" + minutes + ":" + totalSec);
     }
 }
