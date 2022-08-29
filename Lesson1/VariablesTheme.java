@@ -46,8 +46,7 @@ public class VariablesTheme {
         System.out.println("Char type number: " + (int) charNum + ", " + (int) (++charNum) + ", " +
                 (int) (--charNum));
         int intNum = 2_147_483_647;
-        System.out.println("Int type number: " + intNum + ", " + (++intNum) + ", " +
-                (--intNum));
+        System.out.println("Int type number: " + intNum + ", " + (++intNum) + ", " + (--intNum));
         long longNum = 9_223_372_036_854_775_807L;
         System.out.println("Long type number: " + (longNum) + ", " + (++longNum) + ", " +
                 (--longNum));
@@ -60,16 +59,14 @@ public class VariablesTheme {
         int temp = num1;
         num1 = num2;
         num2 = temp;
-        System.out.println("После перестановки: Число1 = " + num1 + ", Число2 = " + num2
-                + "\n");
+        System.out.println("После перестановки: Число1 = " + num1 + ", Число2 = " + num2 + "\n");
 
         System.out.println("Перестановка с помощью арифметических операций");
         System.out.println("До перестановки: Число1 = " + num1 + ", Число2 = " + num2);
         temp = num1 - num2;
         num1 -= temp;
         num2 += temp;
-        System.out.println("После перестановки: Число1 = " + num1 + ", Число2 = " + num2
-                + "\n");
+        System.out.println("После перестановки: Число1 = " + num1 + ", Число2 = " + num2 + "\n");
 
         System.out.println("Перестановка с помощью побитовой операции ^");
         System.out.println("До перестановки: Число1 = " + num1 + ", Число2 = " + num2);
@@ -107,16 +104,14 @@ public class VariablesTheme {
         char underline = '_';
         char leftBracket = '(';
         char rightBracket = ')';
-        System.out.println("" + space + space + space + space + slash +
+        System.out.println("" + space + space + space + space + slash + backslash);
+        System.out.println("" + space + space + space + slash + space + space + backslash);
+        System.out.println("" + space + space + slash + underline + leftBracket + space +
+                rightBracket + backslash);
+        System.out.println("" + space + slash + space + space + space + space + space + space +
                 backslash);
-        System.out.println("" + space + space + space + slash + space +
-                space + backslash);
-        System.out.println("" + space + space + slash + underline + leftBracket +
-                space + rightBracket + backslash);
-        System.out.println("" + space + slash + space + space + space +
-                space + space + space + backslash);
-        System.out.println("" + slash + underline + underline + underline + underline +
-                slash + backslash + underline + underline + backslash);
+        System.out.println("" + slash + underline + underline + underline + underline + slash +
+                backslash + underline + underline + backslash);
 
         System.out.println("\nЗадание 9: Произведение и сумма цифр числа\n");
         srcNum = 345;
@@ -125,8 +120,7 @@ public class VariablesTheme {
         ones = srcNum % 10;
         int prodDigits = hundreds * dozens * ones;
         int sumDigits = hundreds + dozens + ones;
-        System.out.println("Сумма цифр числа "  + srcNum + " равна: " + sumDigits
-);
+        System.out.println("Сумма цифр числа "  + srcNum + " равна: " + sumDigits);
         System.out.println("Произведение цифр числа "  + srcNum + " равна: " + prodDigits);
 
         System.out.println("\nЗадание 10: Преобразование секунд\n");
