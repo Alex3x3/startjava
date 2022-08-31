@@ -36,16 +36,10 @@ public class IfElseStatementTheme {
         System.out.println("\nЗадание 2. Поиск max и min числа\n");
         int num1 = 535;
         int num2 = 7463;
-        int maxNum = 0;
-        int minNum = 0;
         if (num1 > num2) {
-            maxNum = num1;
-            minNum = num2;
-            System.out.println("Число max: " + maxNum + ", число min: " + minNum);
+            System.out.println("Число max: " + num1 + ", число min: " + num2);
         } else if (num1 < num2) {
-            maxNum = num2;
-            minNum = num1;
-            System.out.println("Число max: " + maxNum + ", число min: " + minNum);
+            System.out.println("Число max: " + num2 + ", число min: " + num1);
         } else {
             System.out.println("Числа равны");
         }
@@ -54,14 +48,14 @@ public class IfElseStatementTheme {
         num1 = 1179;
         if (num1 != 0) {
             System.out.println("Имеется число: " + num1);
-            if (num1 %2 == 0) {
-            System.out.println("Число четное");
+            if (num1 % 2 == 0) {
+                System.out.println("Число четное");
             } else {
                 System.out.println("Число нечетное");
             }
             
             if (num1 > 0) {
-            System.out.println("Число положительное");
+                System.out.println("Число положительное");
             } else {
                 System.out.println("Число отрицательное");
             }
@@ -74,7 +68,7 @@ public class IfElseStatementTheme {
         num2 = 548;
         System.out.println("Число 1: " + num1 + ", число 2: " + num2);
         if (num1 / 100 == num2 / 100) {
-            System.out.println("Разряд 3 (сотен) чисел равен. Число сотен: " + num1/100);
+            System.out.println("Разряд 3 (сотен) чисел равен. Число сотен: " + num1 / 100);
         }
 
         if ((num1 % 100 / 10) == (num2 % 100 / 10)) {
@@ -87,14 +81,14 @@ public class IfElseStatementTheme {
         }
 
         System.out.println("\nЗадание 5. Определение буквы, числа или символа по их коду\n");
-        char codeChar = '\u0057';
+        char codeChar = 'W';
         System.out.print("Код \'" + codeChar + "\' - ");
         if (codeChar > 30 && codeChar < 39) {
             System.out.print("число\n");
         } else if (codeChar  >= 65 && codeChar <= 90) {
-            System.out.print("большая буква\n");
+            System.out.println("большая буква");
         } else if (codeChar >= 97 && codeChar <= 122) {
-            System.out.print("маленькая буква\n");
+            System.out.println("маленькая буква");
         } else {
             System.out.println("не буква и не число");
         }
@@ -112,7 +106,7 @@ public class IfElseStatementTheme {
         }
         System.out.println("Процент начислений за год: " + percentage + "%");
         System.out.println("Сумма вклада с начисленными за год процентами: " + (depositSum + 
-                (depositSum * percentage)/100));
+                (depositSum * percentage) / 100));
 
         System.out.println("\nЗадание 7. Определение оценки по предметам\n");
         int historyPercents = 59;
