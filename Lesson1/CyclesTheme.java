@@ -160,31 +160,34 @@ public class CyclesTheme {
 
         System.out.println("\nЗадание 9. Определение, является ли число счастливым\n");
         num = 127_235;
-        int digit = 0;
-        sumDigits = 0;
-        int sumDigits2 = 0;
         System.out.print("Сумма цифр ");
+        int numLeftPart = num / 1000;
+        int sumLeftPart = 0;
 
-        for (int i = 0; i < 6; i++) {
-            digit = num % 10;
-            System.out.print(digit);
-            sumDigits += digit;
-            num /= 10;
-            if ((i + 1) % 3 == 0) {
-                System.out.print(" = " + sumDigits);
-                System.out.println();
-                if ((i + 1) == 3) {
-                    sumDigits2 = sumDigits;
-                    sumDigits = 0;
-                    System.out.print("Сумма цифр ");
-                }
-            }
+        for (int i = 0; i < 3; i++) {
+             int digit = numLeftPart % 10;
+             System.out.print(digit);
+             sumLeftPart += digit;
+             numLeftPart /= 10;
         }
 
-        if (sumDigits == sumDigits2) {
-            System.out.println("Число является счастливым");
+        System.out.print(" = " + sumLeftPart);
+
+        int sumRightPart = 0;
+        System.out.print("\nСумма цифр ");
+        for (int i = 0; i < 3; i++) {
+             int digit = num % 10;
+             System.out.print(digit);
+             sumRightPart += digit;
+             num /= 10;
+        }
+
+        System.out.print(" = " + sumRightPart);
+
+        if (sumLeftPart == sumRightPart) {
+            System.out.println("\nЧисло является счастливым");
         } else {
-            System.out.println("Число не является счастливым");
+            System.out.println("\nЧисло не является счастливым");
         }
 
         System.out.println("\nЗадание 10. Вывод таблицы умножения Пифагора\n");
