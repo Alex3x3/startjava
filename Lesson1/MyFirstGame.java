@@ -8,10 +8,7 @@ public class MyFirstGame {
 
         while (answer != guessNum) {
             answer = (startRange + endRange) / 2;
-            if (answer == guessNum) {
-                System.out.println("Вы победили! Загаданное число = " + answer);
-                break;
-            } else if (answer < guessNum) {
+            if (answer < guessNum) {
                 startRange = answer + 1;
                 System.out.println("Число = " + answer + " меньше того," +
                         "что загадал компьютер");
@@ -21,5 +18,6 @@ public class MyFirstGame {
                         "что загадал компьютер");
             }
         }
+        System.out.println("Вы победили! Загаданное число = " + answer);
     }
 }

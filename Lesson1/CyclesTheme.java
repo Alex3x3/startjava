@@ -162,12 +162,12 @@ public class CyclesTheme {
         num = 127_235;
         int numLeftPart = num / 1000;
         System.out.print("Сумма цифр " + numLeftPart + " = ");
-        int numRightPart = num - numLeftPart * 1000;
+        int numRightPart = num % 1000;
         int tmp = numRightPart;
         int sumLeftPart = 0;
         int sumRightPart = 0;
 
-        for (int i = 0; i < 3; i++) {
+        while (numLeftPart > 0) {
             sumLeftPart += numLeftPart % 10;
             numLeftPart /= 10;
 
