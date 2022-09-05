@@ -160,29 +160,23 @@ public class CyclesTheme {
 
         System.out.println("\nЗадание 9. Определение, является ли число счастливым\n");
         num = 127_235;
-        System.out.print("Сумма цифр ");
         int numLeftPart = num / 1000;
+        System.out.print("Сумма цифр " + numLeftPart + " = ");
+        int numRightPart = num - numLeftPart * 1000;
+        int tmp = numRightPart;
         int sumLeftPart = 0;
-
-        for (int i = 0; i < 3; i++) {
-             int digit = numLeftPart % 10;
-             System.out.print(digit);
-             sumLeftPart += digit;
-             numLeftPart /= 10;
-        }
-
-        System.out.print(" = " + sumLeftPart);
-
         int sumRightPart = 0;
-        System.out.print("\nСумма цифр ");
+
         for (int i = 0; i < 3; i++) {
-             int digit = num % 10;
-             System.out.print(digit);
-             sumRightPart += digit;
-             num /= 10;
+            sumLeftPart += numLeftPart % 10;
+            numLeftPart /= 10;
+
+            sumRightPart += numRightPart % 10;
+            numRightPart /= 10;
         }
 
-        System.out.print(" = " + sumRightPart);
+        System.out.print(sumLeftPart);
+        System.out.print("\nСумма цифр " + tmp + " = " + sumRightPart);
 
         if (sumLeftPart == sumRightPart) {
             System.out.println("\nЧисло является счастливым");
