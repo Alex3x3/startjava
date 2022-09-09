@@ -6,17 +6,18 @@ public class CalculatorTest {
         System.out.println("\n###Программа Калькулятор v1.0###");
         Calculator calculator = new Calculator();
         String userAnswer = "yes";
+        Scanner input = new Scanner(System.in);
         while (userAnswer.equals("yes")) {
-            Scanner input = new Scanner(System.in);
             System.out.print("\nВведите первое число: ");
-            calculator.setNum1(input.nextInt());
+            int num1 = input.nextInt();
+            calculator.setNum1(num1);
             System.out.print("Введите знак математической операции: ");
-            calculator.setSign(input.next().charAt(0));
+            char sign = input.next().charAt(0);
+            calculator.setSign(sign);
             System.out.print("Введите второе число: ");
-            calculator.setNum2(input.nextInt());
-            calculator.calculate();
-            System.out.print(calculator.getNum1() + " " + calculator.getSign() + " " +
-                    calculator.getNum2() + " = " + calculator.getResult());
+            int num2 = input.nextInt();
+            calculator.setNum2(num2);
+            System.out.print(num1 + " " + sign + " " + num2 + " = " + calculator.calculate());
             input.nextLine();
             do {
                 System.out.print("\nХотите продолжить вычисления? [yes/no]: ");
