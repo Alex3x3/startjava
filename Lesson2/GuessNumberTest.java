@@ -10,6 +10,14 @@ public class GuessNumberTest {
         System.out.print("Введите имя второго игрока: ");
         Player player2 = new Player(input.nextLine());
         GuessNumber guessNumber = new GuessNumber(player1, player2);
-        guessNumber.startGame();
+
+        String gameContinue = "yes";
+        while (gameContinue.equals("yes")) {
+            guessNumber.startRound();
+            do {
+                System.out.print("\nХотите продолжить игру? [yes/no]: ");
+                gameContinue = input.nextLine();
+            } while (!gameContinue.equals("yes") && !gameContinue.equals("no"));
+        }
     }
 }

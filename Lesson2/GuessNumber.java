@@ -11,32 +11,23 @@ public class GuessNumber {
         this.player2 = player2;
     }
 
-    public void startGame() {
-        Scanner input = new Scanner(System.in);
-        String gameContinue = "yes";
-        while (gameContinue.equals("yes")) {
-            guessNum = (int) (Math.random() * 100 + 1);
-            do {
-                startRound(player1);
-                if (player1.getNumber() == guessNum) {
-                    break;
-                }
+    public void startRound() {
+        guessNum = (int) (Math.random() * 100 + 1);
+        do {
+            makeMove(player1);
+            if (player1.getNumber() == guessNum) {
+                break;
+            }
 
-                startRound(player2);
-                if (player2.getNumber() == guessNum) {
-                    break;
-                }
-            } while (player1.getNumber() != guessNum &&
-                    player2.getNumber() != guessNum);
-
-            do {
-                System.out.print("\nХотите продолжить игру? [yes/no]: ");
-                gameContinue = input.nextLine();
-            } while (!gameContinue.equals("yes") && !gameContinue.equals("no"));
-        }
+            makeMove(player2);
+            if (player2.getNumber() == guessNum) {
+                break;
+            }
+        } while (player1.getNumber() != guessNum &&
+                player2.getNumber() != guessNum);
     }
 
-    private void startRound(Player player) {
+    private void makeMove(Player player) {
         Scanner input = new Scanner(System.in);
         System.out.println("\nОчередь игрока: " + player.getName());
         System.out.print("Введите ваш ответ: ");
