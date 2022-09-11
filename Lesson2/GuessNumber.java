@@ -13,26 +13,23 @@ public class GuessNumber {
 
     public void start() {
         guessNum = (int) (Math.random() * 100 + 1);
-        do {
-            makeMove(player1);
-            if (player1.isWinner()) {
+        while (true) {
+            if (makeMove(player1)) {
                 break;
             }
 
-            makeMove(player2);
-            if (player2.isWinner()) {
+            if (makeMove(player2)) {
                 break;
             }
-        } while (!player1.isWinner() && !player2.isWinner());
+        }
     }
 
-    private void makeMove(Player player) {
+    private boolean makeMove(Player player) {
         Scanner console = new Scanner(System.in);
         System.out.println("\nОчередь игрока: " + player.getName());
         System.out.print("Введите ваш ответ: ");
         player.setNumber(console.nextInt());
         console.nextLine();
-        player.setWinner(false);
         if (player.getNumber() < guessNum) {
             System.out.println("Число = " + player.getNumber() + " меньше того, " +
                     "что загадал компьютер");
@@ -41,7 +38,8 @@ public class GuessNumber {
                     "что загадал компьютер");
         } else {
             System.out.println(player.getName() + " победил");
-            player.setWinner(true);
+            return true;
         }
+        return false;
     }
 }
