@@ -32,7 +32,8 @@ public class ArrayTheme {
                     : intArr[i] == 8 ? (intArr[i] + " = " + result)
                     : (""));
         }
-        System.out.println("\n\n" + intArr[0] + " " + intArr[9]);
+        System.out.println("\n\nИндекс " + intArr[0] + " = " + intArr[0] +
+                ", индекс " + intArr[9] + " = " + intArr[9]);
 
         System.out.println("\nЗадание 3. Удаление элементов массива\n");
         double[] doubleArr = new double[15];
