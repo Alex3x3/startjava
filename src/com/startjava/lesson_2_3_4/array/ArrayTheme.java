@@ -8,16 +8,17 @@ public class ArrayTheme {
         int[] intArr = {2, 3, 7, 1, 5, 4, 6};
         System.out.println("Массив до реверсирования:");
         ArrayTheme arrayTheme = new ArrayTheme();
-        arrayTheme.showIntArr(intArr);
+        arrayTheme.printIntArr(intArr);
         System.out.println();
 
-        for (int i = 0, j = intArr.length - 1; i < intArr.length / 2; i++, j--) {
+        int len = intArr.length;
+        for (int i = 0, j = len - 1; i < len / 2; i++, j--) {
             int tmp = intArr[i];
             intArr[i] = intArr[j];
             intArr[j] = tmp;
         }
         System.out.println("\nМассив после реверсирования:");
-        arrayTheme.showIntArr(intArr);
+        arrayTheme.printIntArr(intArr);
 
         System.out.println("\n\nЗадание 2. Вывод произведения элементов массива\n");
         intArr = new int[10];
@@ -26,75 +27,68 @@ public class ArrayTheme {
         }
 
         int result = 1;
-        for (int i = 1; i < intArr.length - 1; i++) {
+        len = intArr.length;
+        for (int i = 1; i < len - 1; i++) {
             result *= intArr[i];
-            System.out.print(intArr[i] != 8 ? (intArr[i] + " * ")
-                    : intArr[i] == 8 ? (intArr[i] + " = " + result)
-                    : (""));
+            System.out.print(intArr[i] + ((intArr[i] != 8) ? (" * ") : (" = " + result)));
         }
         System.out.println("\n\nИндекс " + intArr[0] + " = " + intArr[0] +
                 ", индекс " + intArr[9] + " = " + intArr[9]);
 
         System.out.println("\nЗадание 3. Удаление элементов массива\n");
         double[] doubleArr = new double[15];
-        for (int i = 0; i < doubleArr.length; i++) {
+        len = doubleArr.length;
+        for (int i = 0; i < len; i++) {
             doubleArr[i] = Math.random();
         }
         System.out.println("Исходный массив:\n");
-        arrayTheme.showDoubleArr(doubleArr);
+        arrayTheme.printDoubleArr(doubleArr);
 
-        double middleCellValue = doubleArr[(doubleArr.length - 1) / 2];
+        double middleCellValue = doubleArr[(len - 1) / 2];
         int zeroedCellCount = 0;
-        for (int i = 0; i < doubleArr.length; i++) {
+        for (int i = 0; i < len; i++) {
             if (doubleArr[i] > middleCellValue) {
                 doubleArr[i] = 0;
                 zeroedCellCount++;
             }
         }
         System.out.println("\nИзмененный массив:\n");
-        arrayTheme.showDoubleArr(doubleArr);
+        arrayTheme.printDoubleArr(doubleArr);
         System.out.println("\nколичество обнуленных ячеек: " + zeroedCellCount);
 
         System.out.println("\nЗадание 4. Вывод элементов массива лесенкой в обратном порядке\n");
-        char[] chArray = new char['Z' - 'A' + 1];
-        char currentSymbol = 'A';
-        for (int i = 0; i < chArray.length; i++) {
-            chArray[i] = currentSymbol++;
+        char[] abc = new char['Z' - 'A' + 1];
+        len = abc.length;
+        for (int i = 0; i < len; i++) {
+            abc[i] = (char) ('A' + i);
         }
-        int elementsInRow = 1;
-        int currentPos = 0;
-        while (elementsInRow <= chArray.length) {
-            for (int i = chArray.length - 1; i >= 0; i--) {
-                System.out.print(chArray[i]);
-                currentPos++;
 
-                if (elementsInRow == currentPos) {
-                    System.out.println();
-                    currentPos = 0;
-                    elementsInRow++;
-                    break;
-                }
+        for (int i = 0; i < len; i++) {
+            for (int j = len - 1; j >= len - 1 - i; j--) {
+                System.out.print(abc[j]);
             }
+            System.out.println();
         }
 
         System.out.println("\nЗадание 5. Генерация уникальных чисел\n");
         intArr = new int[30];
-        for (int i = 0; i < intArr.length; i++) {
-            boolean repeat;
+        len = intArr.length;
+        for (int i = 0; i < len; i++) {
+            boolean uniqueNum;
             do {
                 intArr[i] = (int) (Math.random() * 40 + 60);
-                repeat = false;
+                uniqueNum = true;
                 for (int j = 0; j < i; j++) {
                     if (intArr[i] == intArr[j]) {
-                        repeat = true;
+                        uniqueNum = false;
                         break;
                     }
                 }
-            } while (repeat);
+            } while (!uniqueNum);
         }
 
         Arrays.sort(intArr);
-        for (int i = 0, j = 1; i < intArr.length; i++, j++) {
+        for (int i = 0, j = 1; i < len; i++, j++) {
             System.out.printf("%3d", intArr[i]);
             if (j == 10) {
                 j = 0;
@@ -105,12 +99,12 @@ public class ArrayTheme {
         System.out.println("\nЗадание 6. Сдвиг элементов массива\n");
         String[] srcStringArr = {"    ", "AA", "", "BBB", "CC", "D", "    ", "E", "FF", "G", ""};
         System.out.print("Исходный массив: ");
-        arrayTheme.showStringArr(srcStringArr);
+        arrayTheme.printStringArr(srcStringArr);
         System.out.println();
 
         int count = 0;
         for (String s : srcStringArr) {
-            if (!s.contains(" ") && s.length() > 0) {
+            if (!s.isBlank()) {
                 count++;
             }
         }
@@ -130,17 +124,17 @@ public class ArrayTheme {
             }
         }
         System.out.print("Преобразованный массив: ");
-        arrayTheme.showStringArr(destStringArr);
+        arrayTheme.printStringArr(destStringArr);
         System.out.println();
     }
 
-    private void showIntArr(int[] arr) {
+    private void printIntArr(int[] arr) {
         for (int i : arr) {
             System.out.print(i + " ");
         }
     }
 
-    private void showDoubleArr(double[] arr) {
+    private void printDoubleArr(double[] arr) {
         int numPosition = 0;
         for (double d : arr) {
             System.out.printf("%6.3f", d);
@@ -151,7 +145,7 @@ public class ArrayTheme {
         }
     }
 
-    private void showStringArr(String[] arr) {
+    private void printStringArr(String[] arr) {
         for (String s : arr) {
             System.out.print(s);
         }
