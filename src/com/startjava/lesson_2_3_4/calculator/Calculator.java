@@ -6,36 +6,39 @@ public class Calculator {
     private int num2;
     private char sign;
 
-    public void setNum1(int num1) {
-        this.num1 = num1;
+    public Calculator(String exp) {
+        String[] expParts = exp.split(" ");
+        num1 = Integer.parseInt(expParts[0]);
+        sign = expParts[1].charAt(0);
+        num2 = Integer.parseInt(expParts[2]);
     }
 
-    public void setNum2(int num2) {
-        this.num2 = num2;
+    public int getNum1() {
+        return num1;
     }
 
-    public void setSign(char sign) {
-        this.sign = sign;
+    public int getNum2() {
+        return num2;
+    }
+
+    public char getSign() {
+        return sign;
     }
 
     public int calculate() {
         switch (sign) {
             case '+':
-                return num1 + num2;
+                return Math.addExact(num1, num2);
             case '-':
-                return num1 - num2;
+                return Math.subtractExact(num1, num2);
             case '*':
-                return num1 * num2;
+                return Math.multiplyExact(num1, num2);
             case '/':
                 return num1 / num2;
             case '%':
                 return num1 % num2;
             case '^':
-                int result = 1;
-                for (int i = 0; i < num2; i++) {
-                    result *= num1;
-                }
-                return result;
+                return (int) Math.pow(num1, num2);
         }
         return 0;
     }
