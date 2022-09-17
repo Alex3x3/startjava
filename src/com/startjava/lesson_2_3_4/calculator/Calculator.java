@@ -2,44 +2,53 @@ package com.startjava.lesson_2_3_4.calculator;
 
 public class Calculator {
 
-    private int num1;
-    private int num2;
-    private char sign;
+    static private int num1;
+    static private int num2;
+    static private char sign;
 
-    public Calculator(String exp) {
-        String[] expParts = exp.split(" ");
-        num1 = Integer.parseInt(expParts[0]);
-        sign = expParts[1].charAt(0);
-        num2 = Integer.parseInt(expParts[2]);
+    public static int calculate(String exp) throws Exception {
+        splitExp(exp);
+        return switch (sign) {
+            case '+' -> Math.addExact(num1, num2);
+            case '-' -> Math.subtractExact(num1, num2);
+            case '*' -> Math.multiplyExact(num1, num2);
+            case '/' -> num1 / num2;
+            case '%' -> num1 % num2;
+            case '^' -> (int) Math.pow(num1, num2);
+            default -> throw new Exception("знак выражения");
+        };
     }
 
-    public int getNum1() {
-        return num1;
-    }
-
-    public int getNum2() {
-        return num2;
-    }
-
-    public char getSign() {
-        return sign;
-    }
-
-    public int calculate() {
-        switch (sign) {
-            case '+':
-                return Math.addExact(num1, num2);
-            case '-':
-                return Math.subtractExact(num1, num2);
-            case '*':
-                return Math.multiplyExact(num1, num2);
-            case '/':
-                return num1 / num2;
-            case '%':
-                return num1 % num2;
-            case '^':
-                return (int) Math.pow(num1, num2);
+    private static void splitExp(String exp) throws Exception {
+        String[] expArr = exp.split(" ");
+        if (expArr.length != 3) {
+            throw new Exception("количество элементов выражения");
         }
-        return 0;
+
+        try {
+            num1 = Integer.parseInt(expArr[0]);
+        } catch (Exception e) {
+            throw new Exception("1-ое число");
+        }
+
+        if (num1 < 0) {
+            throw new Exception("1-ое число меньше нуля");
+        }
+
+        try {
+            sign = expArr[1].charAt(0);
+        } catch (Exception e) {
+            throw new Exception("знак выражения");
+        }
+
+        try {
+            num2 = Integer.parseInt(expArr[2]);
+        } catch (Exception e) {
+            throw new Exception("2-ое число");
+        }
+
+        if (num2 < 0) {
+            throw new Exception("2-ое число меньше нуля");
+        }
     }
 }

@@ -5,14 +5,20 @@ import java.util.Scanner;
 public class CalculatorTest {
 
     public static void main(String[] args) {
-        System.out.println("\n###Программа Калькулятор v2.0###");
+        System.out.println("\n###Программа Калькулятор v3.0###");
         String userAnswer = "yes";
         Scanner input = new Scanner(System.in);
         while (userAnswer.equals("yes")) {
             System.out.print("\nВведите математическое выражение: ");
-            Calculator calculator = new Calculator(input.nextLine());
-            System.out.print(calculator.getNum1() + " " + calculator.getSign() + " "
-                    + calculator.getNum2() + " = " + calculator.calculate());
+            while (true) {
+                try {
+                    String exp = input.nextLine();
+                    System.out.print(exp + " = " + Calculator.calculate(exp));
+                    break;
+                } catch (Exception e) {
+                    System.out.print("\nОшибка ввода (" + e.getMessage() + "). Повторите ввод: ");
+                }
+            }
             do {
                 System.out.print("\nХотите продолжить вычисления? [yes/no]: ");
                 userAnswer = input.nextLine();
