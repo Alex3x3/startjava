@@ -12,10 +12,10 @@ public class ArrayTheme {
         System.out.println();
 
         int len = intArr.length;
-        for (int i = 0, j = len - 1; i < len / 2; i++, j--) {
+        for (int i = 0; i < len; i++, len--) {
             int tmp = intArr[i];
-            intArr[i] = intArr[j];
-            intArr[j] = tmp;
+            intArr[i] = intArr[len - 1];
+            intArr[len - 1] = tmp;
         }
         System.out.println("\nМассив после реверсирования:");
         arrayTheme.printIntArr(intArr);
@@ -30,7 +30,7 @@ public class ArrayTheme {
         len = intArr.length;
         for (int i = 1; i < len - 1; i++) {
             result *= intArr[i];
-            System.out.print(intArr[i] + ((intArr[i] != 8) ? (" * ") : (" = " + result)));
+            System.out.print(intArr[i] + ((intArr[i] != len - 2) ? (" * ") : (" = " + result)));
         }
         System.out.println("\n\nИндекс " + intArr[0] + " = " + intArr[0] +
                 ", индекс " + intArr[9] + " = " + intArr[9]);
