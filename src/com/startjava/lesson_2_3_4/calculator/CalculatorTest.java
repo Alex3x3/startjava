@@ -12,8 +12,8 @@ public class CalculatorTest {
             System.out.print("\nВведите математическое выражение: ");
             while (true) {
                 try {
-                    String exp = input.nextLine();
-                    System.out.print(exp + " = " + Calculator.calculate(exp));
+                    String expression = input.nextLine();
+                    System.out.print(expression + " = " + Calculator.calculate(expression));
                     break;
                 } catch (RuntimeException e) {
                     System.out.print("\nОшибка ввода (" + e + "). Повторите ввод: ");

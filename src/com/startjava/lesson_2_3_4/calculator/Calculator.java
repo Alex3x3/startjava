@@ -6,8 +6,8 @@ public class Calculator {
     static private int num2;
     static private char sign;
 
-    public static int calculate(String exp) {
-        splitExp(exp);
+    public static int calculate(String expression) {
+        splitExp(expression);
         return switch (sign) {
             case '+' -> Math.addExact(num1, num2);
             case '-' -> Math.subtractExact(num1, num2);
@@ -19,8 +19,8 @@ public class Calculator {
         };
     }
 
-    private static void splitExp(String exp) {
-        String[] expArr = exp.split(" ");
+    private static void splitExp(String expression) {
+        String[] expArr = expression.split(" ");
         if (expArr.length != 3) {
             throw new ArrayIndexOutOfBoundsException("количество элементов выражения");
         }
