@@ -22,32 +22,32 @@ public class Calculator {
     private static void splitExp(String expression) {
         String[] expArr = expression.split(" ");
         if (expArr.length != 3) {
-            throw new ArrayIndexOutOfBoundsException("количество элементов выражения");
+            throw new IllegalArgumentException("количество элементов выражения");
         }
 
         try {
             num1 = Integer.parseInt(expArr[0]);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("1-ое число");
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("1-ое число");
         }
 
-        if (num1 < 0) {
-            throw new IllegalArgumentException("1-ое число меньше нуля");
+        if (num1 < 1) {
+            throw new IllegalArgumentException("1-ое число меньше или равно нулю");
         }
 
         if (expArr[1].length() > 1) {
-            throw new StringIndexOutOfBoundsException("знак выражения");
+            throw new IllegalArgumentException("знак выражения");
         }
         sign = expArr[1].charAt(0);
 
         try {
             num2 = Integer.parseInt(expArr[2]);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("2-ое число");
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("2-ое число");
         }
 
-        if (num2 < 0) {
-            throw new IllegalArgumentException("2-ое число меньше нуля");
+        if (num2 < 1) {
+            throw new IllegalArgumentException("2-ое число меньше или равно нулю");
         }
     }
 }
