@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class GuessNumber {
 
-    private Player player1;
-    private Player player2;
+    private final Player player1;
+    private final Player player2;
     private int guessNum;
 
     public GuessNumber(Player player1, Player player2) {
@@ -14,22 +14,29 @@ public class GuessNumber {
     }
 
     public void start() {
+        player1.reset();
+        player2.reset();
         guessNum = (int) (Math.random() * 100 + 1);
-        while (true) {
-            if (makeMove(player1)) {
-                break;
+        while (player1.hasMoves() || player2.hasMoves()) {
+            if (player1.hasMoves()) {
+                if (makeMove(player1)) {
+                    break;
+                }
             }
-
-            if (makeMove(player2)) {
-                break;
+            if (player2.hasMoves()) {
+                if (makeMove(player2)) {
+                    break;
+                }
             }
         }
+        player1.showAnswers();
+        player2.showAnswers();
     }
 
     private boolean makeMove(Player player) {
-        Scanner console = new Scanner(System.in);
         System.out.println("\nОчередь игрока: " + player.getName());
         System.out.print("Введите ваш ответ: ");
+        Scanner console = new Scanner(System.in);
         player.setNumber(console.nextInt());
         console.nextLine();
         if (player.getNumber() < guessNum) {
@@ -39,8 +46,15 @@ public class GuessNumber {
             System.out.println("Число = " + player.getNumber() + " больше того, " +
                     "что загадал компьютер");
         } else {
-            System.out.println(player.getName() + " победил");
+            System.out.println("Игрок " + player.getName() + " угадал число " + player.getNumber() +
+                    " с " + (player.getMove() + 1) + " попытки");
+            player.setNextMove();
             return true;
+        }
+
+        player.setNextMove();
+        if (!player.hasMoves()) {
+            System.out.println("У " + player.getName() + " закончились попытки");
         }
         return false;
     }

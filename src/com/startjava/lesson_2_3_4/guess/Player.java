@@ -1,9 +1,13 @@
 package com.startjava.lesson_2_3_4.guess;
 
+import java.util.Arrays;
+
 public class Player {
 
-    private String name;
-    private int number;
+    private final String name;
+    private final int[] numbers = new int[10];
+
+    private int move = 0;
 
     public Player(String name) {
         this.name = name;
@@ -14,10 +18,35 @@ public class Player {
     }
 
     public int getNumber() {
-        return number;
+        return numbers[move];
     }
 
     public void setNumber(int number) {
-        this.number = number;
+        numbers[move] = number;
+    }
+
+    public int getMove() {
+        return move;
+    }
+
+    public void setNextMove() {
+        move++;
+    }
+
+    public boolean hasMoves() {
+        return move < 10;
+    }
+
+    public void reset() {
+        Arrays.fill(numbers, 0, move, 0);
+        move = 0;
+    }
+
+    public void showAnswers() {
+        int[] answers = Arrays.copyOf(numbers, move);
+        System.out.print("\nОтветы игрока " + getName() + ": ");
+        for (int i : answers) {
+            System.out.print(i + " ");
+        }
     }
 }
