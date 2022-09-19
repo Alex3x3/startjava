@@ -15,8 +15,8 @@ public class CalculatorTest {
                     String exp = input.nextLine();
                     System.out.print(exp + " = " + Calculator.calculate(exp));
                     break;
-                } catch (Exception e) {
-                    System.out.print("\nОшибка ввода (" + e.getMessage() + "). Повторите ввод: ");
+                } catch (RuntimeException e) {
+                    System.out.print("\nОшибка ввода (" + e + "). Повторите ввод: ");
                 }
             }
             do {
