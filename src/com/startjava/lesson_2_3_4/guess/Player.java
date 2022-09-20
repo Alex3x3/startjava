@@ -18,19 +18,15 @@ public class Player {
     }
 
     public int getNumber() {
-        return numbers[move];
+        return numbers[move - 1];
     }
 
-    public void setNumber(int number) {
-        numbers[move] = number;
+    public void addNumber(int number) {
+        numbers[move++] = number;
     }
 
     public int getMove() {
         return move;
-    }
-
-    public void setNextMove() {
-        move++;
     }
 
     public boolean hasMoves() {
@@ -42,11 +38,7 @@ public class Player {
         move = 0;
     }
 
-    public void showAnswers() {
-        int[] answers = Arrays.copyOf(numbers, move);
-        System.out.print("\nОтветы игрока " + getName() + ": ");
-        for (int i : answers) {
-            System.out.print(i + " ");
-        }
+    public int[] getAnswers() {
+        return Arrays.copyOf(numbers, move);
     }
 }
