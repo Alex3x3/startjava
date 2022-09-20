@@ -7,7 +7,7 @@ public class Player {
     private final String name;
     private final int[] numbers = new int[10];
 
-    private int move = 0;
+    private int move;
 
     public Player(String name) {
         this.name = name;

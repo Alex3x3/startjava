@@ -47,7 +47,9 @@ public class GuessNumber {
             System.out.println("Игрок " + player.getName() + " угадал число " + answer +
                     " с " + (player.getMove()) + " попытки");
             return true;
-        } else if (answer < guessNum) {
+        }
+
+        if (answer < guessNum) {
             System.out.println("Число = " + answer + " меньше того, " +
                     "что загадал компьютер");
         } else {
