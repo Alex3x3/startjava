@@ -1,45 +1,64 @@
 package com.startjava.lesson_2_3_4.guess;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GuessNumber {
 
-    private final Player player1;
-    private final Player player2;
+    private final Player[] players;
     private int guessNum;
 
-    public GuessNumber(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+    public GuessNumber(Player... players) {
+        this.players = players;
     }
 
-    public void start() {
-        player1.reset();
-        player2.reset();
-        guessNum = (int) (Math.random() * 100 + 1);
-        while (true) {
-            if (player1.hasMoves()) {
-                if (makeMove(player1)) {
-                    break;
-                }
-            }
-            if (player2.hasMoves()) {
-                if (makeMove(player2)) {
-                    break;
-                }
-            } else {
-                break;
+    public void startGame() {
+        Player[] queue = toss(players);
+        for (int i = 0; i < 3; i++) {
+            startRound(queue);
+            if (i < 2) {
+                System.out.println("\nСледующий раунд...");
             }
         }
-        showAnswers(player1, player1.getAnswers());
-        showAnswers(player2, player2.getAnswers());
+        showWinners(queue);
+    }
+
+    private void startRound(Player[] queue) {
+        for (Player player : players) {
+            player.resetRound();
+        }
+        guessNum = (int) (Math.random() * 100 + 1);
+
+        boolean stop = false;
+        round:
+        while (!stop) {
+            stop = true;
+            for (Player player : queue) {
+                if (player.hasMoves()) {
+                    stop = false;
+                    if (makeMove(player)) {
+                        player.incrementWin();
+                        break round;
+                    }
+                }
+            }
+        }
+        for (Player player : queue) {
+            showAnswers(player);
+        }
+        System.out.println();
     }
 
     private boolean makeMove(Player player) {
         System.out.println("\nОчередь игрока: " + player.getName());
         System.out.print("Введите ваш ответ: ");
         Scanner console = new Scanner(System.in);
-        player.addNumber(console.nextInt());
+        try {
+            player.addNumber(console.nextInt());
+        } catch (InputMismatchException e) {
+            System.out.println("Игрок " + player.getName() + " ввел некорректное число");
+            return false;
+        }
         console.nextLine();
 
         int answer = player.getNumber();
@@ -49,13 +68,9 @@ public class GuessNumber {
             return true;
         }
 
-        if (answer < guessNum) {
-            System.out.println("Число = " + answer + " меньше того, " +
-                    "что загадал компьютер");
-        } else {
-            System.out.println("Число = " + answer + " больше того, " +
-                    "что загадал компьютер");
-        }
+        System.out.print("Число = " + answer);
+        System.out.println(answer < guessNum ? " меньше того, что загадал компьютер" :
+                " больше того, что загадал компьютер");
 
         if (!player.hasMoves()) {
             System.out.println("У " + player.getName() + " закончились попытки");
@@ -64,10 +79,39 @@ public class GuessNumber {
         return false;
     }
 
-    private void showAnswers(Player player, int[] answers) {
+    private Player[] toss(Player... players) {
+        Player[] queue = new Player[players.length];
+        for (int i = players.length - 1; i >= 0; i--) {
+            players[i].setWinToZero();
+            int randomNum = (int) (Math.random() * (i + 1));
+            queue[i] = players[randomNum];
+
+            Player tmp = players[i];
+            players[i] = players[randomNum];
+            players[randomNum] = tmp;
+        }
+        return queue;
+    }
+
+    private void showAnswers(Player player) {
         System.out.print("\nОтветы игрока " + player.getName() + ": ");
-        for (int i : answers) {
+        for (int i : player.getAnswers()) {
             System.out.print(i + " ");
+        }
+    }
+
+    private void showWinners(Player[] queue) {
+        int maxWin = 0;
+        for (Player player : queue) {
+            if (player.getWin() > maxWin)
+                maxWin = player.getWin();
+        }
+
+        System.out.println();
+        for (Player player : queue) {
+            if (player.getWin() == maxWin) {
+                System.out.println("Игрок " + player.getName() + " победил, количество побед в игре: " + maxWin);
+            }
         }
     }
 }

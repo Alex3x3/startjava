@@ -1,6 +1,7 @@
 package com.startjava.lesson_2_3_4.guess;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 public class Player {
 
@@ -8,6 +9,8 @@ public class Player {
     private final int[] numbers = new int[10];
 
     private int move;
+
+    private int win;
 
     public Player(String name) {
         this.name = name;
@@ -22,7 +25,12 @@ public class Player {
     }
 
     public void addNumber(int number) {
-        numbers[move++] = number;
+
+        if (number > 0 && number <= 100) {
+            numbers[move++] = number;
+        } else {
+            throw new InputMismatchException();
+        }
     }
 
     public int getMove() {
@@ -33,12 +41,25 @@ public class Player {
         return move < 10;
     }
 
-    public void reset() {
-        Arrays.fill(numbers, 0, move, 0);
-        move = 0;
+    public void setWinToZero() {
+        win = 0;
     }
+
+    public void incrementWin() {
+        win++;
+    }
+
+    public int getWin() {
+        return win;
+    }
+
 
     public int[] getAnswers() {
         return Arrays.copyOf(numbers, move);
+    }
+
+    public void resetRound() {
+        Arrays.fill(numbers, 0, move, 0);
+        move = 0;
     }
 }
