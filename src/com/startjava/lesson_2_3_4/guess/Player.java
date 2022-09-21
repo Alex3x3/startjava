@@ -25,7 +25,6 @@ public class Player {
     }
 
     public void addNumber(int number) {
-
         if (number > 0 && number <= 100) {
             numbers[move++] = number;
         } else {
@@ -52,7 +51,6 @@ public class Player {
     public int getWin() {
         return win;
     }
-
 
     public int[] getAnswers() {
         return Arrays.copyOf(numbers, move);

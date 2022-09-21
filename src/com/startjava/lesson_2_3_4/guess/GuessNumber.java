@@ -13,37 +13,44 @@ public class GuessNumber {
     }
 
     public void startGame() {
-        Player[] queue = toss(players);
+        drawLots();
         for (int i = 0; i < 3; i++) {
-            startRound(queue);
+            startRound();
             if (i < 2) {
                 System.out.println("\nСледующий раунд...");
             }
         }
-        showWinners(queue);
+        showWinners();
     }
 
-    private void startRound(Player[] queue) {
+    private void drawLots() {
+        for (int i = players.length - 1; i >= 0; i--) {
+            players[i].setWinToZero();
+            int randomNum = (int) (Math.random() * (i + 1));
+            Player tmp = players[i];
+            players[i] = players[randomNum];
+            players[randomNum] = tmp;
+        }
+    }
+
+    private void startRound() {
         for (Player player : players) {
             player.resetRound();
         }
         guessNum = (int) (Math.random() * 100 + 1);
 
         boolean stop = false;
-        round:
         while (!stop) {
-            stop = true;
-            for (Player player : queue) {
-                if (player.hasMoves()) {
-                    stop = false;
+            for (Player player : players) {
+                if (!stop && player.hasMoves()) {
                     if (makeMove(player)) {
                         player.incrementWin();
-                        break round;
+                        stop = true;
                     }
                 }
             }
         }
-        for (Player player : queue) {
+        for (Player player : players) {
             showAnswers(player);
         }
         System.out.println();
@@ -69,28 +76,15 @@ public class GuessNumber {
         }
 
         System.out.print("Число = " + answer);
-        System.out.println(answer < guessNum ? " меньше того, что загадал компьютер" :
-                " больше того, что загадал компьютер");
+        System.out.print(answer < guessNum ? " меньше того" :
+                " больше того");
+        System.out.println(", что загадал компьютер");
 
         if (!player.hasMoves()) {
             System.out.println("У " + player.getName() + " закончились попытки");
         }
 
         return false;
-    }
-
-    private Player[] toss(Player... players) {
-        Player[] queue = new Player[players.length];
-        for (int i = players.length - 1; i >= 0; i--) {
-            players[i].setWinToZero();
-            int randomNum = (int) (Math.random() * (i + 1));
-            queue[i] = players[randomNum];
-
-            Player tmp = players[i];
-            players[i] = players[randomNum];
-            players[randomNum] = tmp;
-        }
-        return queue;
     }
 
     private void showAnswers(Player player) {
@@ -100,17 +94,18 @@ public class GuessNumber {
         }
     }
 
-    private void showWinners(Player[] queue) {
+    private void showWinners() {
         int maxWin = 0;
-        for (Player player : queue) {
+        for (Player player : players) {
             if (player.getWin() > maxWin)
                 maxWin = player.getWin();
         }
 
         System.out.println();
-        for (Player player : queue) {
+        for (Player player : players) {
             if (player.getWin() == maxWin) {
-                System.out.println("Игрок " + player.getName() + " победил, количество побед в игре: " + maxWin);
+                System.out.println("Игрок " + player.getName() +
+                        " победил, количество побед в игре: " + maxWin);
             }
         }
     }
