@@ -13,19 +13,22 @@ public class GuessNumber {
     }
 
     public void startGame() {
-        drawLots();
-        for (int i = 0; i < 3; i++) {
+        castLots();
+        for (Player player : players) {
+            player.setWinToZero();
+        }
+        int lenght = players.length;
+        for (int i = 0; i < lenght; i++) {
             startRound();
-            if (i < 2) {
+            if (i < lenght - 1) {
                 System.out.println("\nСледующий раунд...");
             }
         }
         showWinners();
     }
 
-    private void drawLots() {
+    private void castLots() {
         for (int i = players.length - 1; i >= 0; i--) {
-            players[i].setWinToZero();
             int randomNum = (int) (Math.random() * (i + 1));
             Player tmp = players[i];
             players[i] = players[randomNum];
@@ -39,13 +42,13 @@ public class GuessNumber {
         }
         guessNum = (int) (Math.random() * 100 + 1);
 
-        boolean stop = false;
-        while (!stop) {
+        boolean isStopped = false;
+        while (!isStopped) {
             for (Player player : players) {
-                if (!stop && player.hasMoves()) {
+                if (!isStopped && player.hasMoves()) {
                     if (makeMove(player)) {
                         player.incrementWin();
-                        stop = true;
+                        isStopped = true;
                     }
                 }
             }
@@ -76,8 +79,7 @@ public class GuessNumber {
         }
 
         System.out.print("Число = " + answer);
-        System.out.print(answer < guessNum ? " меньше того" :
-                " больше того");
+        System.out.print(answer < guessNum ? " меньше того" : " больше того");
         System.out.println(", что загадал компьютер");
 
         if (!player.hasMoves()) {

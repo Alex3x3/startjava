@@ -8,12 +8,7 @@ public class GuessNumberTest {
         System.out.println("\n###Guess Number Game v3.0###\n");
         System.out.println("У каждого игрока по 10 попыток\n");
         Scanner console = new Scanner(System.in);
-        Player[] players = new Player[3];
-        for (int i = 0; i < 3; i++) {
-            System.out.print("Введите имя игрока " + (i + 1) + ": ");
-            players[i] = new Player(console.nextLine());
-        }
-        GuessNumber game = new GuessNumber(players);
+        GuessNumber game = new GuessNumber(setPlayers(console));
 
         String option = "yes";
         while (option.equals("yes")) {
@@ -23,5 +18,14 @@ public class GuessNumberTest {
                 option = console.nextLine();
             } while (!option.equals("yes") && !option.equals("no"));
         }
+    }
+
+    private static Player[] setPlayers(Scanner console) {
+        Player[] players = new Player[3];
+        for (int i = 0; i < players.length; i++) {
+            System.out.print("Введите имя игрока " + (i + 1) + ": ");
+            players[i] = new Player(console.nextLine());
+        }
+        return players;
     }
 }
