@@ -20,11 +20,17 @@ public class Book {
         this.title = title;
     }
 
-    public void setPublishYear(int publishYear) {
-        if (publishYear > 0 && publishYear <= 2022) {
-            this.publishYear = publishYear;
+    public void setPublishYear(String publishYear) {
+        int tmp;
+        try {
+            tmp = Integer.parseInt(publishYear);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Ввод должен быть целым цислом.");
+        }
+        if (tmp > 0 && tmp <= 2022) {
+            this.publishYear = tmp;
         } else {
-            throw new InputMismatchException();
+            throw new InputMismatchException("Неверно указан год издания.");
         }
     }
 
