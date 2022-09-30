@@ -32,49 +32,66 @@ public class Main {
                 continue;
             }
             System.out.println();
-            switch (menuItem) {
-                case 1 -> System.out.println("Кол-во книг на полке: " + shelf.getBooksNum());
-                case 2 -> System.out.println("Свободного места достаточно для: " + shelf.getFreeSpace() + " книг");
-                case 3 -> {
-                    if (shelf.getFreeSpace() > 0) {
-                        System.out.print("Введите автора книги: ");
-                        String author = console.nextLine();
-                        System.out.print("Введите название книги: ");
-                        String title = console.nextLine();
-                        System.out.print("Введите года издания: ");
-                        while (true) {
-                            try {
-                                shelf.add(author, title, console.nextLine());
-                                break;
-                            } catch (InputMismatchException | IllegalArgumentException e) {
-                                System.out.print(e.getMessage() + " Повторите ввод года издания: ");
-                            }
-                        }
-                    } else {
-                        System.out.println("\nПолка уже полностью заполнена.");
-                    }
-                }
-                case 4 -> {
-                    System.out.print("Укажите название книги для удаления: ");
-                    String title = console.nextLine();
-                    System.out.print("\nКнига \"" + title);
-                    System.out.println(shelf.delete(title) == 1 ? "\" удалена с полки" : "\" не обнаружена");
-                }
-                case 5 -> {
-                    System.out.print("Укажите название книги для поиска: ");
-                    String title = console.nextLine();
-                    System.out.print("\nКнига \"" + title);
-                    System.out.print(shelf.find(title) >= 0 ? "\" находится на полке" : "\" не находится полке");
-                    System.out.println();
-                }
-                case 6 -> {
-                    shelf.clear();
-                    System.out.println("Полка очищена");
-                }
-                case 7 -> System.out.println("Программа закончила работу");
-                default -> System.out.println("Указанная опция отсутствует в меню, повторите ввод");
-            }
+            switchMenu(menuItem, shelf);
         } while (menuItem != 7);
+    }
+
+    private static void switchMenu(int menuItem, BookShelf shelf) {
+        Scanner console = new Scanner(System.in);
+        switch (menuItem) {
+            case 1 -> System.out.println("Кол-во книг на полке: " + shelf.getBooksNum());
+            case 2 -> System.out.println("Свободного места достаточно для: " + shelf.getFreeSpace() + " книг");
+            case 3 -> {
+                if (shelf.getFreeSpace() > 0) {
+                    System.out.print("Введите автора книги: ");
+                    String author = console.nextLine();
+                    System.out.print("Введите название книги: ");
+                    String title = console.nextLine();
+                    System.out.print("Введите года издания: ");
+                    while (true) {
+                        try {
+                            shelf.add(new Book(author, title, console.nextLine()));
+                            break;
+                        } catch (InputMismatchException | IllegalArgumentException e) {
+                            System.out.print(e.getMessage() + " Повторите ввод года издания: ");
+                        }
+                    }
+                } else {
+                    System.out.println("\nПолка уже полностью заполнена.");
+                }
+            }
+            case 4 -> {
+                System.out.print("Укажите название книги для удаления: ");
+                String title = console.nextLine();
+                System.out.print("\nКнига \"");
+                int bookIndex = shelf.findIndex(title);
+                if (bookIndex >= 0) {
+                    System.out.print(shelf.getBooks()[bookIndex] + "\" удалена с полки");
+                    shelf.delete(bookIndex);
+                } else {
+                    System.out.print(title + "\" не обнаружена");
+                }
+                System.out.println();
+            }
+            case 5 -> {
+                System.out.print("Укажите название книги для поиска: ");
+                String title = console.nextLine();
+                System.out.print("\nКнига \"");
+                int index = shelf.findIndex(title);
+                if (index >= 0) {
+                    System.out.print(shelf.getBooks()[index] + "\" находится на полке");
+                } else {
+                    System.out.print(title + "\" не обнаружена");
+                }
+                System.out.println();
+            }
+            case 6 -> {
+                shelf.clear();
+                System.out.println("Полка очищена");
+            }
+            case 7 -> System.out.println("Программа закончила работу");
+            default -> System.out.println("Указанная опция отсутствует в меню, повторите ввод");
+        }
     }
 
     private static void show(BookShelf shelf) {
@@ -87,7 +104,7 @@ public class Main {
             int titleFreeSpace = titleMaxLength - bookLength;
             System.out.print("|" + " ".repeat(titleFreeSpace / 2) + books[i] +
                              " ".repeat(titleFreeSpace / 2));
-            System.out.println(titleFreeSpace % 2 != 0 ? " |" : "|");
+            System.out.println(titleFreeSpace % 2 == 0 ? "|" : " |");
             if (i == 0) {
                 System.out.println("|" + "-".repeat(titleMaxLength) + "|");
                 System.out.println("|" + " ".repeat(titleMaxLength) + "|");

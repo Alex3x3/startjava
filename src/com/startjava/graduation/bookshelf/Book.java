@@ -4,20 +4,18 @@ import java.util.InputMismatchException;
 
 public class Book {
 
-    private String author;
-    private String title;
+    private final String author;
+    private final String title;
     private int publishYear;
 
-    public void setAuthor(String author) {
+    public Book(String author, String title, String publishYear) {
         this.author = author;
+        this.title = title;
+        setPublishYear(publishYear);
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public void setPublishYear(String publishYear) {
@@ -25,9 +23,9 @@ public class Book {
         try {
             tmp = Integer.parseInt(publishYear);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Ввод должен быть целым цислом.");
+            throw new IllegalArgumentException("Ввод должен быть целым числом.");
         }
-        if (tmp > 0 && tmp <= 2022) {
+        if (tmp >= 1455 && tmp <= 2022) {
             this.publishYear = tmp;
         } else {
             throw new InputMismatchException("Неверно указан год издания.");
