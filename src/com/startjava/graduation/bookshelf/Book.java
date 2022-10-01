@@ -18,7 +18,7 @@ public class Book {
         return title;
     }
 
-    public void setPublishYear(String publishYear) {
+    private void setPublishYear(String publishYear) {
         int tmp;
         try {
             tmp = Integer.parseInt(publishYear);

@@ -7,12 +7,18 @@ public class BookShelf {
     private int booksNum;
     private final Book[] books = new Book[10];
 
+    private int titleMaxLength;
+
     public int getBooksNum() {
         return booksNum;
     }
 
     public Book[] getBooks() {
         return Arrays.copyOfRange(books, 0, booksNum);
+    }
+
+    public int getTitleMaxLength() {
+        return titleMaxLength;
     }
 
     public int getFreeSpace() {
@@ -22,18 +28,28 @@ public class BookShelf {
     public void add(Book book) {
         books[booksNum] = book;
         booksNum++;
-    }
-
-    public void delete(int bookIndex) {
-
-        if (bookIndex != -1) {
-            System.arraycopy(books, bookIndex + 1, books, bookIndex, booksNum - bookIndex - 1);
-            books[booksNum - 1] = null;
-            booksNum--;
+        int titleLength = book.toString().length();
+        if (titleLength > titleMaxLength) {
+            titleMaxLength = titleLength;
         }
     }
 
-    public int findIndex(String title) {
+    public boolean delete(String title) {
+        int bookIndex = findIndex(title);
+        if (bookIndex != -1) {
+            int titleLength = books[bookIndex].toString().length();
+            System.arraycopy(books, bookIndex + 1, books, bookIndex, booksNum - bookIndex - 1);
+            books[booksNum - 1] = null;
+            booksNum--;
+            if (titleLength == titleMaxLength) {
+                calcMaxTitleLength();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private int findIndex(String title) {
         for (int i = booksNum - 1; i >= 0; i--) {
             if (books[i].getTitle().equals(title)) {
                 return i;
@@ -45,5 +61,18 @@ public class BookShelf {
     public void clear() {
         Arrays.fill(books, 0, booksNum, null);
         booksNum = 0;
+    }
+
+    private void calcMaxTitleLength() {
+        titleMaxLength = 0;
+        for (Book book : books) {
+            if (book == null) {
+                break;
+            }
+            int titleLength = book.toString().length();
+            if (titleLength > titleMaxLength) {
+                titleMaxLength = titleLength;
+            }
+        }
     }
 }

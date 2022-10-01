@@ -64,30 +64,24 @@ public class Main {
                 System.out.print("Укажите название книги для удаления: ");
                 String title = console.nextLine();
                 System.out.print("\nКнига \"");
-                int bookIndex = shelf.findIndex(title);
-                if (bookIndex >= 0) {
-                    System.out.print(shelf.getBooks()[bookIndex] + "\" удалена с полки");
-                    shelf.delete(bookIndex);
-                } else {
-                    System.out.print(title + "\" не обнаружена");
-                }
-                System.out.println();
+                String book = findBook(shelf, title);
+                System.out.println(shelf.delete(title)
+                        ? book + "\" удалена с полки"
+                        : title + "\" не обнаружена");
             }
             case 5 -> {
                 System.out.print("Укажите название книги для поиска: ");
                 String title = console.nextLine();
                 System.out.print("\nКнига \"");
-                int index = shelf.findIndex(title);
-                if (index >= 0) {
-                    System.out.print(shelf.getBooks()[index] + "\" находится на полке");
-                } else {
-                    System.out.print(title + "\" не обнаружена");
-                }
-                System.out.println();
+                String book = findBook(shelf, title);
+                System.out.println(book.length() > 0
+                        ? book + "\" находится на полке"
+                        : title + "\" не обнаружена");
             }
             case 6 -> {
                 shelf.clear();
                 System.out.println("Полка очищена");
+
             }
             case 7 -> System.out.println("Программа закончила работу");
             default -> System.out.println("Указанная опция отсутствует в меню, повторите ввод");
@@ -95,7 +89,7 @@ public class Main {
     }
 
     private static void show(BookShelf shelf) {
-        int titleMaxLength = getTitleMaxLength(shelf);
+        int titleMaxLength = shelf.getTitleMaxLength();
         Book[] books = shelf.getBooks();
         int booksNum = shelf.getBooksNum();
         for (int i = booksNum - 1; i >= 0; i--) {
@@ -115,17 +109,14 @@ public class Main {
         }
     }
 
-    private static int getTitleMaxLength(BookShelf shelf) {
-        int titleMaxLength = 0;
-        for (Book book : shelf.getBooks()) {
-            if (book == null) {
-                return titleMaxLength;
-            }
-            int titleLength = book.toString().length();
-            if (titleLength > titleMaxLength) {
-                titleMaxLength = titleLength;
+    private static String findBook(BookShelf shelf, String title) {
+        Book[] books = shelf.getBooks();
+
+        for (int i = books.length - 1; i >= 0; i--) {
+            if (books[i].getTitle().equals(title)) {
+                return String.valueOf(books[i]);
             }
         }
-        return titleMaxLength;
+        return "";
     }
 }
