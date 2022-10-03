@@ -28,10 +28,7 @@ public class BookShelf {
     public void add(Book book) {
         books[booksNum] = book;
         booksNum++;
-        int titleLength = book.toString().length();
-        if (titleLength > titleMaxLength) {
-            titleMaxLength = titleLength;
-        }
+        extendTitleMaxLength(book);
     }
 
     public boolean delete(String title) {
@@ -49,7 +46,7 @@ public class BookShelf {
         return false;
     }
 
-    private int findIndex(String title) {
+    public int findIndex(String title) {
         for (int i = booksNum - 1; i >= 0; i--) {
             if (books[i].getTitle().equals(title)) {
                 return i;
@@ -69,10 +66,14 @@ public class BookShelf {
             if (book == null) {
                 break;
             }
-            int titleLength = book.toString().length();
-            if (titleLength > titleMaxLength) {
-                titleMaxLength = titleLength;
-            }
+            extendTitleMaxLength(book);
+        }
+    }
+
+    private void extendTitleMaxLength(Book book) {
+        int titleLength = book.toString().length();
+        if (titleLength > titleMaxLength) {
+            titleMaxLength = titleLength;
         }
     }
 }

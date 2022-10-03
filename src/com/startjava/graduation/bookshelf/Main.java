@@ -30,6 +30,7 @@ public class Main {
             } catch (NumberFormatException e) {
                 System.out.println("\nНеверный формат ввода (допускается только целое число), повторите ввод");
                 continue;
+
             }
             System.out.println();
             switchMenu(menuItem, shelf);
@@ -60,23 +61,22 @@ public class Main {
                     System.out.println("\nПолка уже полностью заполнена.");
                 }
             }
+
             case 4 -> {
                 System.out.print("Укажите название книги для удаления: ");
                 String title = console.nextLine();
-                System.out.print("\nКнига \"");
-                String book = findBook(shelf, title);
+                System.out.print("\nКнига \"" + title + "\" ");
                 System.out.println(shelf.delete(title)
-                        ? book + "\" удалена с полки"
-                        : title + "\" не обнаружена");
+                        ? "удалена с полки"
+                        : "не обнаружена");
             }
             case 5 -> {
                 System.out.print("Укажите название книги для поиска: ");
                 String title = console.nextLine();
-                System.out.print("\nКнига \"");
-                String book = findBook(shelf, title);
-                System.out.println(book.length() > 0
-                        ? book + "\" находится на полке"
-                        : title + "\" не обнаружена");
+                System.out.print("\nКнига \"" + title + "\" ");
+                System.out.println(shelf.findIndex(title) >= 0
+                        ? "находится на полке"
+                        : "не обнаружена");
             }
             case 6 -> {
                 shelf.clear();
@@ -107,16 +107,5 @@ public class Main {
         if (booksNum == 0) {
             System.out.println("|" + " ".repeat(10) + "|");
         }
-    }
-
-    private static String findBook(BookShelf shelf, String title) {
-        Book[] books = shelf.getBooks();
-
-        for (int i = books.length - 1; i >= 0; i--) {
-            if (books[i].getTitle().equals(title)) {
-                return String.valueOf(books[i]);
-            }
-        }
-        return "";
     }
 }
